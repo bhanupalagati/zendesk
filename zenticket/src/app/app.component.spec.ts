@@ -14,7 +14,8 @@ describe('AppComponent', () => {
     detailedViewActive: new Subject(),
     updateActiveTicket: (ticket) => dataServiceSpy.activeTicket = ticket,
     updateView: (view) => dataServiceSpy.detailedViewActive.next(view),
-    getData: () => of(ticketsRespMock)
+    getData: () => of(ticketsRespMock),
+    getCredentials: () => {},
   };
 
   beforeEach(async () => {
@@ -33,6 +34,8 @@ describe('AppComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    // component.testInput = true;
+    spyOn(window, "prompt").and.returnValue("test");
     fixture.detectChanges();
   });
 
@@ -51,7 +54,6 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('app-ticket-list')).toBeFalsy();
     expect(compiled.querySelector('app-ticket-details')).toBeTruthy();
   });
 
