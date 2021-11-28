@@ -1,0 +1,16 @@
+.detailes-container {
+    &__details {
+        padding: 30px;
+    }
+    .flex-row-display {
+        display: flex;
+        align-items: center;
+        padding-bottom: 20px;
+        .name {
+            padding-right: 20px;
+            font-weight: bold;
+            color: grey;
+        }
+
+    }
+}

@@ -1,0 +1,42 @@
+
+.ticket-list-container {
+    &__list-entries {
+        padding: 30px;
+        &__error {
+            .error-img {
+                padding: 20px;
+                text-align: center;
+            }
+            .error-text {
+                font-size: 20px;
+                font-weight: bolder;
+                padding-top: 100px;
+                color: orangered;
+                text-align: center;
+            }
+        }
+        &__loading {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+        }
+        table {
+            width: 100%;
+            th {
+                font-weight: bolder;
+            }
+        }
+        tr:hover {
+            background-color: #C9CCD5;
+        }
+        .mat-paginator-sticky {
+            bottom: 0px;
+            position: sticky;
+            z-index: 10;
+          }
+    }
+}
+

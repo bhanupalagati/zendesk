@@ -1,0 +1,46 @@
+<div class="detailes-container">
+    <app-header [content]="headerContent"></app-header>
+    <div class="detailes-container__details">
+        <div class="flex-row-display">
+            <div class = "name">Ticket Created At</div>
+            <div>{{ activeTicket.created_at | date }}</div>
+        </div>
+        <div class="flex-row-display">
+            <div class = "name">Created By</div>
+            <div>{{ activeTicket.requester_id  }}</div>
+        </div>
+        <div class="flex-row-display">
+            <div class = "name">TAGS</div>
+            <mat-chip-list>
+                <mat-chip color="primary" selected *ngFor="let tag of activeTicket.tags">{{ tag }}</mat-chip>
+            </mat-chip-list>
+        </div>
+        <div class="flex-row-display">
+            <div class = "name">Subject</div>
+            <div>{{ activeTicket.subject }}</div>
+        </div>
+        <div class="flex-row-display">
+            <div class = "name">Ticket Description</div>
+            <div>{{ activeTicket.description  }}</div>
+        </div>
+        <div class="flex-row-display">
+            <div class = "name">Ticket Priority</div>
+            <div>{{activeTicket.priority || "not Available"}}</div>
+        </div>
+        <div class="flex-row-display">
+            <div class = "name">Attachments Allowed</div>
+            <div>{{ activeTicket.allow_attachments  }}</div>
+        </div>
+
+        <div class="flex-row-display">
+            <div class = "name">Last Updated</div>
+            <div>{{ activeTicket.updated_at | date  }}</div>
+        </div>
+
+        <div class="flex-row-display">
+            <div class = "name">Ticket Status</div>
+            <div>{{ activeTicket.status  }}</div>
+        </div>
+        <button mat-raised-button color="primary" (click)="returnToList()">Back To All Tickets</button>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+
+.header_container {
+    display: flex;
+    &_content {
+        background-color: #17494d;
+        color: white;
+        font-weight: bolder;
+        flex-grow: 1;
+        text-align: center;
+        font-size: 50px;
+        padding: 30px;
+    }
+}
