@@ -7,14 +7,14 @@ import { HttpClient } from '@angular/common/http';
 describe('DataService', () => {
   let service: DataService;
   const httpSpy = {
-    post: (prop1, prop2) => of(ticketsRespMock)
+    post: (prop1, prop2) => of(JSON.parse(JSON.stringify(ticketsRespMock)))
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [{provide: HttpClient, useValue: httpSpy}]
     });
-    service = TestBed.inject(DataService);
+    service = TestBed.get(DataService);
   });
 
   it('should be created', () => {
@@ -26,20 +26,19 @@ describe('DataService', () => {
     expect(service.email).toEqual('test.email.com');
   });
 
-  it('Should emit a value on view update', () => {
-    const serviceSpy = spyOn(service.detailedViewActive, 'next');
-    service.updateView(true);
-    expect(serviceSpy).toHaveBeenCalledWith(true);
-  });
-
   it('Should update the active ticket', () => {
     expect(service.activeTicket).toBeFalsy();
+    service.updateView(true);
     service.updateActiveTicket(ticketsMock[0]);
     expect(service.activeTicket).toEqual(ticketsMock[0]);
   });
 
   it('should return ticket response on get Data call', () => {
     service.getData().subscribe(res => expect(res).toEqual(ticketsRespMock));
+  });
+
+  it('should return new tickets response on get Data with page call', () => {
+    service.getDataWithPage(1).subscribe(res => expect(res).toEqual(ticketsRespMock));
   });
 
 });

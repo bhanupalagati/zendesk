@@ -69,7 +69,7 @@ export let ticketsMock: Ticket[] = [
         forum_topic_id: null,
         group_id: 1260815637909,
         has_incidents: false,
-        id: 10,
+        id: 11,
         is_public: true,
         organization_id: 1260918229249,
         priority: null,
@@ -103,7 +103,7 @@ export let ticketsMock: Ticket[] = [
 ];
 
 export let ticketsRespMock: TicketResp = {
-    count: 2,
+    count: 4,
     next_page: null,
     previous_page: null,
     tickets: ticketsMock

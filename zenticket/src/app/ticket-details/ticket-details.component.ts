@@ -20,7 +20,6 @@ export class TicketDetailsComponent implements OnInit {
 
   // On clicking back button list view should be displayed
   returnToList(): any {
-    this.dataService.activeTicket = undefined;
     this.dataService.detailedViewActive.next(false);
   }
 }

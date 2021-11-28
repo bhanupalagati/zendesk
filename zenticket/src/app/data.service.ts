@@ -12,7 +12,7 @@ export class DataService {
   email = '';
   password = '';
   subdomain = '';
-
+  url = `http://127.0.0.1:7999/`;
   constructor(private httpClient: HttpClient) {}
 
   getCredentials(email, password, subdomain): any {
@@ -30,8 +30,12 @@ export class DataService {
   }
 
   getData(): any {
-    const URL = `http://127.0.0.1:7999/`;
-    return this.httpClient.post<TicketResp>(URL, {email: this.email, password: this.password, subdomain: this.subdomain});
+    return this.httpClient.post<TicketResp>(this.url, {email: this.email, password: this.password, subdomain: this.subdomain});
+  }
+
+  getDataWithPage(page): any {
+    return this.httpClient.post<TicketResp>(this.url+"page", {email: this.email, password: this.password, subdomain: this.subdomain, page});
+
   }
 
 }

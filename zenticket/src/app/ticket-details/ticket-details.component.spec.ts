@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, Subject } from 'rxjs';
 
 import { TicketDetailsComponent } from './ticket-details.component';
-import {ticketsRespMock} from '../testData';
+import {ticketsMock, ticketsRespMock} from '../testData';
 import { DataService } from '../data.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -11,19 +11,20 @@ describe('TicketDetailsComponent', () => {
   let fixture: ComponentFixture<TicketDetailsComponent>;
   let service: DataService;
 
-  const dataServiceSpy = {
-    activeTicket: ticketsRespMock.tickets[0],
-    detailedViewActive: new Subject(),
-    updateActiveTicket: (ticket) => dataServiceSpy.activeTicket = ticket,
-    updateView: (view) => dataServiceSpy.detailedViewActive.next(view),
-    getData: () => of(ticketsRespMock)
-  };
+  class DataServiceSpy {
+    activeTicket = ticketsMock[0];
+    detailedViewActive = new Subject();
+    updateActiveTicket(ticket) {this.activeTicket = ticket};
+    updateView(view) {this.detailedViewActive.next(view)};
+    getData() {return of(JSON.parse(JSON.stringify(ticketsRespMock)))};
+    getDataWithPage(page) {return of(JSON.parse(JSON.stringify(ticketsRespMock)))}
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       declarations: [ TicketDetailsComponent ],
-      providers: [{provide: DataService, useValue: dataServiceSpy}]
+      providers: [{provide: DataService, useClass: DataServiceSpy}]
     })
     .compileComponents();
   });
@@ -41,19 +42,19 @@ describe('TicketDetailsComponent', () => {
   });
 
   it('Should fetch the active ticket from the data service', () => {
-    // service.updateActiveTicket(ticketsRespMock.tickets[0]);
+    service.updateActiveTicket(ticketsRespMock.tickets[0]);
     component.ngOnInit();
     expect(component.activeTicket).toEqual(ticketsRespMock.tickets[0]);
   });
 
   it('Should set the header appropriately ', () => {
-    // service.updateActiveTicket(ticketsRespMock.tickets[0]);
+    service.updateActiveTicket(ticketsRespMock.tickets[0]);
     component.ngOnInit();
     expect(component.headerContent).toEqual('Active Ticket Id 10');
   });
 
   it('Should update the detailedView to List view on clicking return to List', () => {
-    // service.updateActiveTicket(ticketsRespMock.tickets[0]);
+    service.updateActiveTicket(ticketsRespMock.tickets[0]);
     const dataServicesViewSpy = spyOn(TestBed.get(DataService).detailedViewActive, 'next');
     component.returnToList();
     expect(dataServicesViewSpy).toHaveBeenCalledWith(false);

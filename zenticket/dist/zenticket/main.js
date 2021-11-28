@@ -64,6 +64,7 @@ class DataService {
         this.email = '';
         this.password = '';
         this.subdomain = '';
+        this.url = `http://127.0.0.1:7999/`;
     }
     getCredentials(email, password, subdomain) {
         this.email = email;
@@ -77,8 +78,10 @@ class DataService {
         this.activeTicket = ticket;
     }
     getData() {
-        const URL = `http://127.0.0.1:7999/`;
-        return this.httpClient.post(URL, { email: this.email, password: this.password, subdomain: this.subdomain });
+        return this.httpClient.post(this.url, { email: this.email, password: this.password, subdomain: this.subdomain });
+    }
+    getDataWithPage(page) {
+        return this.httpClient.post(this.url + "page", { email: this.email, password: this.password, subdomain: this.subdomain, page });
     }
 }
 DataService.ɵfac = function DataService_Factory(t) { return new (t || DataService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };
@@ -359,7 +362,7 @@ function TicketListComponent_div_4_td_5_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const element_r14 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r14.id, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r14 == null ? null : element_r14.id, " ");
 } }
 function TicketListComponent_div_4_th_7_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 21);
@@ -373,7 +376,7 @@ function TicketListComponent_div_4_td_8_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const element_r15 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r15.subject, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r15 == null ? null : element_r15.subject, " ");
 } }
 function TicketListComponent_div_4_th_10_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 21);
@@ -388,7 +391,7 @@ function TicketListComponent_div_4_td_11_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const element_r16 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 1, element_r16.created_at), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 1, element_r16 == null ? null : element_r16.created_at), " ");
 } }
 function TicketListComponent_div_4_th_13_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 21);
@@ -402,7 +405,7 @@ function TicketListComponent_div_4_td_14_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const element_r17 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", element_r17.priority || "not Available", " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", (element_r17 == null ? null : element_r17.priority) || "not Available", " ");
 } }
 function TicketListComponent_div_4_tr_15_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "tr", 23);
@@ -418,8 +421,9 @@ function TicketListComponent_div_4_div_19_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "mat-spinner");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
-const _c1 = function () { return [25, 20, 10]; };
+const _c1 = function () { return [25]; };
 function TicketListComponent_div_4_Template(rf, ctx) { if (rf & 1) {
+    const _r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "table", 9);
@@ -442,7 +446,9 @@ function TicketListComponent_div_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, TicketListComponent_div_4_tr_15_Template, 1, 0, "tr", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, TicketListComponent_div_4_tr_16_Template, 1, 0, "tr", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](17, "mat-paginator", 18, 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "mat-paginator", 18, 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("page", function TicketListComponent_div_4_Template_mat_paginator_page_17_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22); const ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r21.fetchNextPage($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](19, TicketListComponent_div_4_div_19_Template, 2, 0, "div", 20);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -457,9 +463,8 @@ function TicketListComponent_div_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("pageSizeOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](6, _c1));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx_r1.ticketsList);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r1.loading);
 } }
-// import tickets from "../../assets/tickets.json"
 class TicketListComponent {
     constructor(dataService) {
         this.dataService = dataService;
@@ -468,6 +473,10 @@ class TicketListComponent {
         this.detailView = false;
         this.error = false;
         this.errorMsg = 'There is an issue with the API, please try later or contact the admin team.';
+        this.currentPage = 1;
+        this.pageSize = 25;
+        this.maxPageReached = 1;
+        this.loading = true;
     }
     ngOnInit() {
         this.dataService.getData().subscribe(res => {
@@ -479,13 +488,33 @@ class TicketListComponent {
             else {
                 // Fetching and constructing tickets in list view.
                 this.ticketsList = res.tickets;
+                // Faking the tickets counts so that paginator works
+                this.ticketsList.length = res.count;
                 this.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](this.ticketsList);
                 this.dataSource.paginator = this.paginator;
+                this.loading = false;
             }
         }, err => {
             // If there is an error from the system backend
             this.error = true;
         });
+    }
+    // This method is for getting new tickets data
+    fetchNextPage(event) {
+        if (event.pageIndex == this.maxPageReached) {
+            this.loading = true;
+            this.maxPageReached += 1;
+            this.dataService.getDataWithPage(this.maxPageReached).subscribe(res => {
+                this.loading = false;
+                this.ticketsList.length = this.currentPage * this.pageSize;
+                this.currentPage += 1;
+                this.ticketsList.push(...res.tickets);
+                this.ticketsList.length = res.count;
+                this.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"](this.ticketsList);
+                this.dataSource._updateChangeSubscription();
+                this.dataSource.paginator = this.paginator;
+            });
+        }
     }
     // If user clicks on a ticket then detailed view should be shown.
     ticketClicked(ticket) {
@@ -499,7 +528,7 @@ TicketListComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
     } if (rf & 2) {
         let _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.paginator = _t.first);
-    } }, decls: 5, vars: 3, consts: [[1, "ticket-list-container"], [3, "content"], [1, "ticket-list-container__list-entries"], ["class", "ticket-list-container__list-entries__error", 4, "ngIf"], [4, "ngIf"], [1, "ticket-list-container__list-entries__error"], [1, "error-img"], ["src", "assets/error.svg", "alt", "error", "height", "200px", "width", "200px"], [1, "error-text"], ["mat-table", "", 1, "mat-elevation-z8", 3, "dataSource"], ["matColumnDef", "Id"], ["mat-header-cell", "", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "Subject"], ["matColumnDef", "created_at"], ["matColumnDef", "priority"], ["mat-header-row", "", 4, "matHeaderRowDef", "matHeaderRowDefSticky"], ["mat-row", "", 3, "click", 4, "matRowDef", "matRowDefColumns"], ["showFirstLastButtons", "", 1, "mat-paginator-sticky", 3, "pageSizeOptions"], ["paginator", ""], ["class", "ticket-list-container__list-entries__loading", 4, "ngIf"], ["mat-header-cell", ""], ["mat-cell", ""], ["mat-header-row", ""], ["mat-row", "", 3, "click"], [1, "ticket-list-container__list-entries__loading"]], template: function TicketListComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 5, vars: 3, consts: [[1, "ticket-list-container"], [3, "content"], [1, "ticket-list-container__list-entries"], ["class", "ticket-list-container__list-entries__error", 4, "ngIf"], [4, "ngIf"], [1, "ticket-list-container__list-entries__error"], [1, "error-img"], ["src", "assets/error.svg", "alt", "error", "height", "200px", "width", "200px"], [1, "error-text"], ["mat-table", "", 1, "mat-elevation-z8", 3, "dataSource"], ["matColumnDef", "Id"], ["mat-header-cell", "", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "Subject"], ["matColumnDef", "created_at"], ["matColumnDef", "priority"], ["mat-header-row", "", 4, "matHeaderRowDef", "matHeaderRowDefSticky"], ["mat-row", "", 3, "click", 4, "matRowDef", "matRowDefColumns"], [1, "mat-paginator-sticky", 3, "pageSizeOptions", "page"], ["paginator", ""], ["class", "ticket-list-container__list-entries__loading", 4, "ngIf"], ["mat-header-cell", ""], ["mat-cell", ""], ["mat-header-row", ""], ["mat-row", "", 3, "click"], [1, "ticket-list-container__list-entries__loading"]], template: function TicketListComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "app-header", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -607,7 +636,6 @@ class TicketDetailsComponent {
     }
     // On clicking back button list view should be displayed
     returnToList() {
-        this.dataService.activeTicket = undefined;
         this.dataService.detailedViewActive.next(false);
     }
 }
